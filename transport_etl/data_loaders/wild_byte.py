@@ -23,8 +23,8 @@ def load_data_from_file(*args, **kwargs):
 
     dfs = []
     
-    # --- DEV MODE: Set to True to prevent hanging while testing ---
-    DEV_MODE = True 
+    # --- DEV MODE: Change this from True to False for Production! ---
+    DEV_MODE = False 
 
     # 1. Process 'Old' Folder (Zipped CSVs)
     if os.path.exists(old_folder):
