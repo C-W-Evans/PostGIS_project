@@ -1,0 +1,12 @@
+# Ignore sensitive configuration
+transport_etl/io_config.yaml
+
+# Ignore the heavy data files
+transport_etl/data/old/*
+transport_etl/data/new/*
+!transport_etl/data/old/.gitkeep  # (keeps the folder structure but ignores files)
+!transport_etl/data/new/.gitkeep
+
+# Ignore system files
+.DS_Store
+__pycache__/

@@ -1,0 +1,8 @@
+version: 0.1.1
+default:
+  POSTGRES_CONNECT_TIMEOUT: 10
+  POSTGRES_DBNAME: transport_etl
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: CHANGE_ME
+  POSTGRES_HOST: host.docker.internal
+  POSTGRES_PORT: 5432

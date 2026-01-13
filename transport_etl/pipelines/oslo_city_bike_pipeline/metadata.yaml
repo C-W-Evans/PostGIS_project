@@ -1,0 +1,157 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - transform_stations
+  - transform_trips
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: wild byte
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: wild_byte
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - export_stations
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: transform_stations
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - wild_byte
+  uuid: transform_stations
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - export_trips
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: transform_trips
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - wild_byte
+  uuid: transform_trips
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: postgres
+    data_provider_profile: default
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: false
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: test
+  retry_config: null
+  status: updated
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: test
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: postgres
+    data_provider_profile: default
+    export_write_policy: append
+  downstream_blocks:
+  - create_geometry
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_stations
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - transform_stations
+  uuid: export_stations
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_trips
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - transform_trips
+  uuid: export_trips
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: postgres
+    data_provider_profile: default
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: create_geometry
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - export_stations
+  uuid: create_geometry
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2026-01-13 18:27:30.095321+00:00'
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: oslo_city_bike_pipeline
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+uuid: oslo_city_bike_pipeline
+variables_dir: /home/src/mage_data/transport_etl
+widgets: []

@@ -1,0 +1,1 @@
+{"started_at": "datetime", "ended_at": "datetime", "start_station_id": "int64", "end_station_id": "int64", "start_station_name": "str", "start_station_latitude": "float64", "start_station_longitude": "float64"}
