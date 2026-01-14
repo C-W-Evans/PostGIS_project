@@ -12,4 +12,6 @@ transport_etl/data/new/*
 __pycache__/
 
 
-.log
+*.log
+*.json
+*.parquet
