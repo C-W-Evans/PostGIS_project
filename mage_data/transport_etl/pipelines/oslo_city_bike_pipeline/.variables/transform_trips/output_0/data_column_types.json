@@ -1,1 +1,0 @@
-{"started_at": "datetime64[ns, pytz.FixedOffset(60)]", "ended_at": "datetime64[ns, pytz.FixedOffset(60)]", "start_station_id": "int64", "end_station_id": "int64", "duration_minutes": "float64"}

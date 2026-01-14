@@ -1,1 +1,0 @@
-{"station_id": "int64", "station_name": "str", "latitude": "float64", "longitude": "float64"}
