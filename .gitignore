@@ -10,3 +10,6 @@ transport_etl/data/new/*
 # Ignore system files
 .DS_Store
 __pycache__/
+
+
+.log
