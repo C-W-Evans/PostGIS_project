@@ -1,7 +1,6 @@
 if 'data_loader' not in globals():
     from mage_ai.data_preparation.decorators import data_loader
 import os
-import random  # <--- IMPORT ADDED
 from mage_ai.settings.repo import get_repo_path
 
 @data_loader
@@ -26,12 +25,8 @@ def load_data(*args, **kwargs):
         for f in files:
             all_files.append({'type': 'new', 'path': os.path.join(new_folder, f)})
 
-    print(f"Total files found: {len(all_files)}")
 
-    # --- THE FIX: SHUFFLE THE LIST ---
-    # This mixes Old and New files so you see both in the early logs.
-    random.shuffle(all_files)
-    # ---------------------------------
+    all_files = sorted(all_files, key=lambda x: x['path'])
 
     # 3. Create Batches of 5
     BATCH_SIZE = 5
@@ -40,5 +35,12 @@ def load_data(*args, **kwargs):
     for i in range(0, len(all_files), BATCH_SIZE):
         batch_chunk = all_files[i : i + BATCH_SIZE]
         batches.append(batch_chunk)
+
+    print(f"DEBUG: Total Files Found: {len(all_files)}")
+    print(f"DEBUG: Created {len(batches)} batches.")
+    if len(batches) > 0:
+        print(f"DEBUG: First batch size: {len(batches[0])}")
+        print(f"DEBUG: First batch content type: {type(batches[0])}")
+
 
     return batches

@@ -20,11 +20,6 @@ def standardize_columns(df, *args, **kwargs):
         'End time': 'ended_at',
         'Start station': 'start_station_id',
         'End station': 'end_station_id',
-        'Start station number': 'start_station_id',
-        'Start station name': 'start_station_name',
-        # Added explicit check for Latitude/Longitude if they appear in 'New' data
-        'Start Lat': 'start_station_latitude', 
-        'Start Lng': 'start_station_longitude'
     }
     df = df.rename(columns=rename_map)
 
