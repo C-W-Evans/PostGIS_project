@@ -101,6 +101,14 @@ def transform(*args, **kwargs):
             }
             batch_df = batch_df.rename(columns=rename_map)
 
+
+            # --- NEW FIX: FORCE DURATION TO FLOAT ---
+            # This prevents the "smallint" error by forcing a larger data type
+            if 'duration' in batch_df.columns:
+                batch_df['duration'] = batch_df['duration'].astype(float)
+            # ----------------------------------------
+            
+
             # Convert Dates
             if 'started_at' in batch_df.columns:
                 batch_df['started_at'] = pd.to_datetime(batch_df['started_at'], errors='coerce')
