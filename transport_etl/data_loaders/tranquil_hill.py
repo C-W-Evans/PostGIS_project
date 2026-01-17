@@ -28,19 +28,17 @@ def load_data(*args, **kwargs):
 
     all_files = sorted(all_files, key=lambda x: x['path'])
 
-    # 3. Create Batches of 5
-    BATCH_SIZE = 5
+
+    BATCH_SIZE = 1
     batches = []
     
     for i in range(0, len(all_files), BATCH_SIZE):
         batch_chunk = all_files[i : i + BATCH_SIZE]
-        batches.append(batch_chunk)
+        # WRAPPER TRICK: Wrap the list in a dict key 'batch_files'
+        # This prevents Mage from flattening the list!
+        batches.append({'batch_files': batch_chunk})
 
-    print(f"DEBUG: Total Files Found: {len(all_files)}")
-    print(f"DEBUG: Created {len(batches)} batches.")
-    if len(batches) > 0:
-        print(f"DEBUG: First batch size: {len(batches[0])}")
-        print(f"DEBUG: First batch content type: {type(batches[0])}")
-
-
+    print(f"DEBUG: Created {len(batches)} batches.") 
+    print(batches)
+    # Now returns: [{'batch_files': [f1, f2, f3, f4, f5]}, {'batch_files': [f6...]} ...]
     return batches

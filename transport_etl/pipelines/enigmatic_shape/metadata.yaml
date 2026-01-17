@@ -27,131 +27,128 @@ blocks:
   configuration:
     data_provider: postgres
     data_provider_profile: default
-    dynamic: true
+    dbt: {}
+    disable_query_preprocessing: false
     export_write_policy: append
-  downstream_blocks:
-  - process_batch_
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks: []
   executor_config: null
   executor_type: local_python
   has_callback: false
-  language: python
-  name: tranquil hill
+  language: sql
+  name: spellbinding firefly
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: data_loader
-  upstream_blocks:
-  - prepare_db2
-  uuid: tranquil_hill
+  upstream_blocks: []
+  uuid: spellbinding_firefly
 - all_upstream_blocks_executed: false
   color: null
-  configuration: {}
+  configuration:
+    data_provider: postgres
+    data_provider_profile: default
+    export_write_policy: append
   downstream_blocks:
-  - standardize_columns_py
+  - extract_stations_sql
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: process_batch.
+  name: colossal inventor
   retry_config: null
   status: updated
   timeout: null
   type: transformer
   upstream_blocks:
   - tranquil_hill
-  uuid: process_batch_
-- all_upstream_blocks_executed: false
-  color: null
-  configuration: {}
-  downstream_blocks:
-  - transform_stations
-  - transform_trips
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: python
-  name: standardize_columns.py
-  retry_config: null
-  status: updated
-  timeout: null
-  type: transformer
-  upstream_blocks:
-  - process_batch_
-  uuid: standardize_columns_py
+  - station_mapping
+  uuid: colossal_inventor
 - all_upstream_blocks_executed: false
   color: null
   configuration:
-    file_source:
-      path: transformers/transform_stations.py
+    data_provider: postgres
+    data_provider_profile: default
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: true
   downstream_blocks:
-  - export_stations
+  - extract_trips_sql
   executor_config: null
   executor_type: local_python
   has_callback: false
-  language: python
-  name: transform_stations
+  language: sql
+  name: extract_stations_sql
   retry_config: null
   status: updated
   timeout: null
-  type: transformer
+  type: data_exporter
   upstream_blocks:
-  - standardize_columns_py
-  uuid: transform_stations
+  - colossal_inventor
+  uuid: extract_stations_sql
 - all_upstream_blocks_executed: false
   color: null
   configuration:
-    file_source:
-      path: transformers/transform_trips.py
+    data_provider: postgres
+    data_provider_profile: default
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: extract_trips_sql
+  retry_config: null
+  status: updated
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - extract_stations_sql
+  uuid: extract_trips_sql
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    data_provider: postgres
+    data_provider_profile: default
+    dynamic: false
+    export_write_policy: append
   downstream_blocks:
-  - export_trips
+  - colossal_inventor
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: transform_trips
+  name: tranquil hill
   retry_config: null
   status: executed
   timeout: null
-  type: transformer
+  type: data_loader
   upstream_blocks:
-  - standardize_columns_py
-  uuid: transform_trips
-- all_upstream_blocks_executed: false
+  - prepare_db2
+  uuid: tranquil_hill
+- all_upstream_blocks_executed: true
   color: null
-  configuration:
-    file_source:
-      path: data_exporters/export_stations.py
-  downstream_blocks: []
+  configuration: {}
+  downstream_blocks:
+  - colossal_inventor
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: export_stations
+  name: station_mapping
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
-  type: data_exporter
-  upstream_blocks:
-  - transform_stations
-  uuid: export_stations
-- all_upstream_blocks_executed: false
-  color: null
-  configuration:
-    file_source:
-      path: data_exporters/export_trips.py
-  downstream_blocks: []
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: python
-  name: export_trips
-  retry_config: null
-  status: updated
-  timeout: null
-  type: data_exporter
-  upstream_blocks:
-  - transform_trips
-  uuid: export_trips
+  type: data_loader
+  upstream_blocks: []
+  uuid: station_mapping
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config:
