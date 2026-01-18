@@ -71,10 +71,6 @@ def transform(batches, *args, **kwargs):
                         df = pd.read_csv(f_path, low_memory=False)
                     
                     df['source_file'] = os.path.basename(f_path)
-                    
-                    # Force duration to float immediately to save memory/schema
-                    if 'duration' in df.columns:
-                        df['duration'] = pd.to_numeric(df['duration'], errors='coerce')
                         
                     dfs.append(df)
                 except Exception as read_err:
@@ -94,6 +90,10 @@ def transform(batches, *args, **kwargs):
                 'Start station number': 'start_station_id', 'End station number': 'end_station_id'
             }
             batch_df = batch_df.rename(columns=rename_map)
+
+            # This prevents the "smallint" error by forcing a larger data type
+            if 'duration' in batch_df.columns:
+                batch_df['duration'] = batch_df['duration'].astype(float)
 
             # Fix Dates
             if 'started_at' in batch_df.columns:

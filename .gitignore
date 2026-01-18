@@ -16,3 +16,13 @@ __pycache__/
 *.json
 *.parquet
 *.cache
+*.csv
+*.zip
+
+mage_data/transport_etl/.cache/block_action_objects_mapping
+mage_data/transport_etl/mage-ai.db
+mage_data/transport_etl/.cache/blocks_to_pipeline_mapping
+mage_data/transport_etl/.cache/pipeline_details_mapping
+mage_data_backup/transport_etl/mage-ai.db
+transport_etl/data/legacy_station_locations.csv
+mage_data_backup/transport_etl/.operation_history/2026-01-13
