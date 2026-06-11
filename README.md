@@ -14,7 +14,7 @@ Download the raw CSV data and place it in the transport_etl/data/old and transpo
 Run docker compose up, access Mage at localhost:6789 and run the pipeline.
 
 ## Data information
-Source: https://oslobysykkel.no/en/open-data/historical?
+Source: https://oslobysykkel.no/en/open-data/historical
 
 Missing data
 2016 - 1,2,3
